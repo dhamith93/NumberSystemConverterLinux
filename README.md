@@ -1,5 +1,5 @@
 # NumberSystemConverterLinux
-A simple converter to convert between decimal-binary-octal-hexadecimal
+A simple converter to convert between decimal-binary-octal-hexadecimal numbers.
 
 [Windows version](https://github.com/dhamith93/NumberSystemConverter)
 
