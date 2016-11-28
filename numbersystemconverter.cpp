@@ -222,6 +222,7 @@ void NumberSystemConverter::binDec() {
     decOct(sum);
     decHex(sum);
 }
+
 //Octal to All
 void NumberSystemConverter::octAll() {
     QString x = ui->txtOct->text();
