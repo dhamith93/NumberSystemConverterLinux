@@ -281,7 +281,7 @@ void NumberSystemConverter::hexAll(QString tab2) {
                 tab[i] = 15;
             } else if(tab2[i] == '0') {
                 tab[i] = 0;
-            }  else if(tab2[i] == '1') {
+            } else if(tab2[i] == '1') {
                 tab[i] = 1;
             } else if(tab2[i] == '2') {
                 tab[i] = 2;
