@@ -288,7 +288,7 @@ void NumberSystemConverter::hexAll(QString tab2) {
                 tab[i] = 14;
             } else if(tab2[i] == 'F' || tab2[i] == 'f') {
                 tab[i] = 15;
-            }else if(tab2[i] == '0') {
+            } else if(tab2[i] == '0') {
                 tab[i] = 0;
             }  else if(tab2[i] == '1') {
                 tab[i] = 1;
@@ -329,7 +329,7 @@ void NumberSystemConverter::hexAll(QString tab2) {
     decOct(sum);
 }
 
-// powers
+// powers of 2
 long NumberSystemConverter::powers(long x) {
     int i = 1;
     long sum = 1;
@@ -340,17 +340,13 @@ long NumberSystemConverter::powers(long x) {
     return sum;
 }
 
-// > 1^16 powers
+// > powers of 8 and 16
 long NumberSystemConverter::powers_2(int x, int y) {
-    long l;
+    long l = 16;
     long sum = 16;
     if (y == 8) {
         sum = 8;
         l = 8;
-    }
-    else {
-        sum = 16;
-        l = 16;
     }
     for (int i = 2; i <= x; i++) {
         sum = sum * l;
