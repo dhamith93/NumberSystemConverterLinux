@@ -20,56 +20,47 @@ void NumberSystemConverter::on_txtDec_returnPressed() {
     decHex(ui->txtDec->text().toLong());
 }
 
-void NumberSystemConverter::on_txtBin_returnPressed()
-{
+void NumberSystemConverter::on_txtBin_returnPressed() {
     ui->txtDec->clear();
     ui->txtOct->clear();
     ui->txtHex->clear();
     binDec();
 }
 
-void NumberSystemConverter::on_txtOct_returnPressed()
-{
+void NumberSystemConverter::on_txtOct_returnPressed() {
     octAll();
 }
 
-void NumberSystemConverter::on_txtHex_returnPressed()
-{
+void NumberSystemConverter::on_txtHex_returnPressed() {
     hexAll(ui->txtHex->text());
 }
 
-void NumberSystemConverter::on_clearAll_clicked()
-{
+void NumberSystemConverter::on_clearAll_clicked() {
     clear();
 }
 
-void NumberSystemConverter::on_copyDec_clicked()
-{
+void NumberSystemConverter::on_copyDec_clicked() {
     ui->txtDec->selectAll();
     ui->txtDec->copy();
 }
 
-void NumberSystemConverter::on_copyBin_clicked()
-{
+void NumberSystemConverter::on_copyBin_clicked() {
     ui->txtBin->selectAll();
     ui->txtBin->copy();
 }
 
-void NumberSystemConverter::on_copyOct_clicked()
-{
+void NumberSystemConverter::on_copyOct_clicked() {
     ui->txtOct->selectAll();
     ui->txtOct->copy();
 }
 
-void NumberSystemConverter::on_copyHex_clicked()
-{
+void NumberSystemConverter::on_copyHex_clicked() {
     ui->txtHex->selectAll();
     ui->txtHex->copy();
 }
 
-void NumberSystemConverter::on_actionHelp_triggered()
-{
-    QMessageBox::about(this,"Help","This is a number system converter.\n\nEnter the number you want to convert in to the appropriate text box and press 'Enter' on your keyboard. It will be converted in to all of the available number systems. Click on copy to copy the converted number. Click 'Clear' if you want to clear all text boxes.\n\n\t\t\t\t--dhamith93");
+void NumberSystemConverter::on_actionHelp_triggered() {
+    QMessageBox::about(this,"Help","This is a number system converter.\n\nEnter the number you want to convert in to the appropriate text box and hit 'Enter' on your keyboard. It will be converted in to all of the available number systems. Click on copy to copy the converted number. Click 'Clear' if you want to clear all text boxes.\n\n\t\t\t\t--dhamith93");
 
 }
 
@@ -91,7 +82,7 @@ void NumberSystemConverter::decBin(long dec) {
         } else if (dec % 2 == 0) {
             count = 0;
         }
-        dec = dec/2;
+        dec = dec / 2;
         if (dec < 0.9999) {
             break;
         }
@@ -119,13 +110,13 @@ void NumberSystemConverter::decOct(long dec) {
     }
     else {
         while (1) {
-            count = dec%8;
+            count = dec % 8;
             if (dec / 8 <= 0 ) {
-                c[f] = dec%8;
+                c[f] = dec % 8;
             } else if (count >= 0) {
                 c[f] = count;
             }
-            dec = dec/8;
+            dec = dec / 8;
             if (dec == 0) {
                 break;
             }
@@ -166,13 +157,13 @@ void NumberSystemConverter::decHex(long dec) {
     }
     else {
         while (1) {
-            count = dec%16;
+            count = dec % 16;
             if (dec / 16 <= 0 ) {
-                c[f] = dec%16;
+                c[f] = dec % 16;
             } else if (count >= 0) {
                 c[f] = count;
             }
-            dec = dec/16;
+            dec = dec / 16;
             if(c[f] == 10) {
                 c[f] = 'A';
             } else if(c[f] == 11) {
@@ -327,6 +318,7 @@ void NumberSystemConverter::hexAll(QString tab2) {
     ui->txtDec->setText(QString::number(sum));
     decBin(sum);
     decOct(sum);
+    decHex(sum);
 }
 
 // powers of 2

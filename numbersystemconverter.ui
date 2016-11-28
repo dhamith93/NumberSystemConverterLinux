@@ -750,7 +750,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Version 1.0 Linux</string>
+    <string>Version 1.1 Linux</string>
    </property>
    <property name="font">
     <font>
