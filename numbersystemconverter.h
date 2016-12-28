@@ -19,9 +19,9 @@ public:
     void decHex(long dec);
     void binDec();
     void octAll();
-    void hexAll(QString x);
+    void hexAll();
     long powers(long x);
-    long powers_2(int x, int y);
+    long powers2(int x, int y);
     void clear();
 
 private slots:
