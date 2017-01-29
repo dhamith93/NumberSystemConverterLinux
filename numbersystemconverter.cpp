@@ -102,7 +102,6 @@ void NumberSystemConverter::decBin(long dec) {
             ui->txtBin->insert(QString::number(b[j]));
         }          
     }
-    
 }
 
 //Decimal to octal conversion -->
@@ -152,8 +151,7 @@ void NumberSystemConverter::decHex(long dec) {
         }
         ui->txtHex->clear();
         ui->txtHex->setText(d);
-    }
-    else {
+    } else {
         while (1) {
             c[f] = dec % 16;            
             if(c[f] == 10) {
@@ -210,8 +208,7 @@ void NumberSystemConverter::binDec() {
             sum = sum + powers(y);
         }
     }
-    if (!invalid)
-    {
+    if (!invalid) {
         ui->txtDec->clear();
         ui->txtDec->setText(QString::number(sum));
         decOct(sum);
@@ -247,14 +244,12 @@ void NumberSystemConverter::octAll() {
             sum = sum + (b[i] * 1);
         }
     }
-    if (!invalid)
-    {
+    if (!invalid) {
         ui->txtDec->clear();
         ui->txtDec->setText(QString::number(sum));
         decBin(sum);
         decHex(sum);
-    }    
-    
+    }        
 }
 
 // Hexadecimal to All
@@ -318,8 +313,7 @@ void NumberSystemConverter::hexAll() {
         }
         c++;
     }
-    if (!invalid)
-    {
+    if (!invalid) {
         ui->txtDec->clear();
         ui->txtDec->setText(QString::number(sum));
         decBin(sum);
