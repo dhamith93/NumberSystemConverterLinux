@@ -2,12 +2,13 @@
 #include "ui_numbersystemconverter.h"
 #include <QMessageBox>
 
+int count = 0;
+
 NumberSystemConverter::NumberSystemConverter(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::NumberSystemConverter) {
 	setWindowTitle( QCoreApplication::applicationName() );
     ui->setupUi(this);
-    
 }
 
 NumberSystemConverter::~NumberSystemConverter() {
@@ -15,29 +16,35 @@ NumberSystemConverter::~NumberSystemConverter() {
 }
 
 void NumberSystemConverter::on_txtDec_returnPressed() {
-
-    QRegExp chk("\\d*");
-    if (chk.exactMatch(ui->txtDec->text())) {
-        decBin(ui->txtDec->text().toLong());
-        decOct(ui->txtDec->text().toLong());
-        decHex(ui->txtDec->text().toLong());
-    } else {
-        clear();
-        QMessageBox::information(this, tr("Error!"), tr("The value you entered contains numbers and/or symbols!"));
-    }
+    if (ui->txtDec->text() != "") {
+        QRegExp chk("\\d*");
+        if (chk.exactMatch(ui->txtDec->text())) {
+            decBin(ui->txtDec->text().toLong());
+            decOct(ui->txtDec->text().toLong());
+            decHex(ui->txtDec->text().toLong());
+        } else {
+            clear();
+            QMessageBox::information(this, tr("Error!"), tr("The value you entered contains numbers and/or symbols!"));
+        }
+    }    
 }
 
 void NumberSystemConverter::on_txtBin_returnPressed() {
-    
-    binDec();
+    if (ui->txtBin->text() != "") {
+        binDec();
+    }
 }
 
 void NumberSystemConverter::on_txtOct_returnPressed() {
-    octAll();
+    if (ui->txtOct->text() != "") {
+        octAll();
+    }    
 }
 
 void NumberSystemConverter::on_txtHex_returnPressed() {
-    hexAll();
+    if (ui->txtHex->text() != "") {
+        hexAll();
+    }
 }
 
 void NumberSystemConverter::on_clearAll_clicked() {
@@ -77,67 +84,66 @@ void NumberSystemConverter::clear() {
 }
 
 //Decimal to binary conversion -->
-void NumberSystemConverter::decBin(long dec) {
-    long b[64];
-    int f = 0, count = 0;
+void NumberSystemConverter::decBin(long dec) {    
+    int binary[64];
+    count = 0;
     if(dec == 0 || dec == 1) {
         ui->txtBin->setText(QString::number(dec));
     } else {
-        while (1) {
+        while (1) {            
             if(dec % 2 == 1) {
-                count = 1;
+                binary[count] = 1;
             } else if (dec % 2 == 0) {
-                count = 0;
+                binary[count] = 0;
             }
             dec = dec / 2;
             if (dec < 0.9999) {
                 break;
-            }
-            b[f] = count;
-            f++;
+            }            
+            count += 1;
         }
-        b[f] = 1; //since % doesn't output the final dec/2 and MSB is always = 1
+        binary[count] = 1; //since % doesn't output the final dec/2 and MSB is always = 1
         ui->txtBin->clear();
-        for(int j = f; j >= 0; j--) {
-            ui->txtBin->insert(QString::number(b[j]));
+        for(int j = count; j >= 0; j--) {
+            ui->txtBin->insert(QString::number(binary[j]));
         }          
     }
 }
 
 //Decimal to octal conversion -->
 void NumberSystemConverter::decOct(long dec) {
-    long c[64];
-    int f = 0;
+    int octal[21];
+    count = 0;
     if (dec < 7) {
         ui->txtOct->clear();
         ui->txtOct->setText(QString::number(dec));
     } else {
         while (1) {
-            c[f] = dec % 8;
+            octal[count] = dec % 8;
             dec = dec / 8;
             if (dec == 0) {
                 break;
             }
-            f++;
+            count += 1;
         }
         ui->txtOct->clear();
-        for(int j = f; j >= 0; j--) {
-            ui->txtOct->insert(QString::number(c[j]));
+        for(int j = count; j >= 0; j--) {
+            ui->txtOct->insert(QString::number(octal[j]));
         }
     }
 }
 
 //Decimal to hex
 void NumberSystemConverter::decHex(long dec) {
-    long c[16];
-    int f = 0;
+    int hexa[16];
+    count = 0;
     QString d;
     if (dec >= 0 && dec < 10) {
         ui->txtHex->clear();
         ui->txtHex->setText(QString::number(dec));
     } else if(dec > 9 && dec < 16) {
         if(dec == 10) {
-                d = 'A';
+            d = 'A';
         } else if(dec == 11) {
             d = 'B';
         } else if(dec == 12) {
@@ -153,33 +159,33 @@ void NumberSystemConverter::decHex(long dec) {
         ui->txtHex->setText(d);
     } else {
         while (1) {
-            c[f] = dec % 16;            
-            if(c[f] == 10) {
-                c[f] = 'A';
-            } else if(c[f] == 11) {
-                c[f] = 'B';
-            } else if(c[f] == 12) {
-                c[f] = 'C';
-            } else if(c[f] == 13) {
-                c[f] = 'D';
-            } else if(c[f] == 14) {
-                c[f] = 'E';
-            } else if(c[f] == 15) {
-                c[f] = 'F';
+            hexa[count] = dec % 16;            
+            if(hexa[count] == 10) {
+                hexa[count] = 'A';
+            } else if(hexa[count] == 11) {
+                hexa[count] = 'B';
+            } else if(hexa[count] == 12) {
+                hexa[count] = 'C';
+            } else if(hexa[count] == 13) {
+                hexa[count] = 'D';
+            } else if(hexa[count] == 14) {
+                hexa[count] = 'E';
+            } else if(hexa[count] == 15) {
+                hexa[count] = 'F';
             }
             dec = dec / 16;
             if (dec == 0) {
                 break;
             }
-            f++;
+            count += 1;
         }
         ui->txtHex->clear();
-        for(int j = f; j >= 0; j--) {
-            if ((int)c[j] >= 0 && (int)c[j] < 10 ) {
-                ui->txtHex->insert(QString::number(c[j]));
+        for(int j = count; j >= 0; j--) {
+            if ((int)hexa[j] >= 0 && (int)hexa[j] < 10 ) {
+                ui->txtHex->insert(QString::number(hexa[j]));
             }
             else {
-                d = c[j];
+                d = hexa[j];
                 ui->txtHex->insert(d);
             }
         }
@@ -188,82 +194,81 @@ void NumberSystemConverter::decHex(long dec) {
 
 //Binary to decimal
 void NumberSystemConverter::binDec() {
-    QString x = ui->txtBin->text();
-    int k = x.length()-1;
-    int b[x.length()];
+    QString binary = ui->txtBin->text();
+    int binaryLength = binary.length()-1;
+    int binaryArray[binary.length()];
     bool invalid = false;
-    for (int n = 0; n < x.length(); n++) {
-        b[k] = x[n].digitValue();
-        if(b[k] > 1 || b[k] < 0) {
+    
+    // Fills binaryArray and checks for invalid values
+    for (int n = 0; n < binary.length(); n++) {
+        binaryArray[binaryLength] = binary[n].digitValue();
+        if(binaryArray[binaryLength] > 1 || binaryArray[binaryLength] < 0) {
             invalid = true;
             clear();
             QMessageBox::information(this, tr("Error!"), tr("The value you entered is not a binary number!"));
             break;
         }
-        k--;
+        binaryLength -= 1;
     }
-    long sum = 0;
-    for(int y = 0; y < (ui->txtBin->text()).length(); y++) {
-        if(b[y] == 1) {
-            sum = sum + powers(y);
+    long decimal = 0;
+    for(int y = 0; y < (binary.length()); y++) {
+        if(binaryArray[y] == 1) {
+            decimal += powers(y);
         }
     }
     if (!invalid) {
         ui->txtDec->clear();
-        ui->txtDec->setText(QString::number(sum));
-        decOct(sum);
-        decHex(sum);
+        ui->txtDec->setText(QString::number(decimal));
+        decOct(decimal);
+        decHex(decimal);
     }
 }
 
 //Octal to All
 void NumberSystemConverter::octAll() {
-    QString x = ui->txtOct->text();
-    int k = x.length()-1;
-    int b[x.length()];
+    QString octal = ui->txtOct->text();
+    int octalLength = octal.length()-1;
+    int octalArray[octal.length()];
     bool invalid = false;
-    for (int n = 0; n < x.length(); n++) {
-        b[k] = x[n].digitValue();
-        if(b[k] > 7 || b[k] < 0) {
+    for (int n = 0; n < octal.length(); n++) {
+        octalArray[octalLength] = octal[n].digitValue();
+        if(octalArray[octalLength] > 7 || octalArray[octalLength] < 0) {
             invalid = true;
             clear();
             QMessageBox::information(this, tr("Error!"), tr("The value you entered is not an octal number!"));
             break;
         }
-        k--;
+        octalLength -= 1;
     }
-    long sum = 0;
+    long decimal = 0;
     for (int i = 0; i < (ui->txtOct->text()).length(); i++) {
         if(i >= 2) {
-            sum = sum + (b[i] * powers2(i, 8));
+            decimal += (octalArray[i] * powers2(i, 8));
         }
         else if (i == 1) {
-            sum = sum + (b[i] * 8);
+            decimal += (octalArray[i] * 8);
         }
         else if (i == 0) {
-            sum = sum + (b[i] * 1);
+            decimal += (octalArray[i] * 1);
         }
     }
     if (!invalid) {
         ui->txtDec->clear();
-        ui->txtDec->setText(QString::number(sum));
-        decBin(sum);
-        decHex(sum);
+        ui->txtDec->setText(QString::number(decimal));
+        decBin(decimal);
+        decHex(decimal);
     }        
 }
 
 // Hexadecimal to All
 void NumberSystemConverter::hexAll() {
     QString hexString = ui->txtHex->text();
-    int b = -1; // count goes like 0 > 1 > etc.
-    long sum = 0;
-    int c = 0;
+    int hexLength = hexString.length() - 1; 
+    long decimal = 0;
+    count = 0;
     bool invalid = false;
-    for (int a = 0; hexString[a] != 0; a++) {
-        b++; // count goes like 0 > 1 > etc. first run of the loop = 0
-    }
-    int hexStringNum[b];
-    for (int i = b; i >= 0; i--) {        
+    int hexStringNum[hexLength];
+    for (int i = hexLength; i >= 0; i--) {        
         if(hexString[i] == 'A' || hexString[i] == 'a') {
             hexStringNum[i] = 10;
         } else if(hexString[i] == 'B' || hexString[i] == 'b') {
@@ -302,23 +307,23 @@ void NumberSystemConverter::hexAll() {
             QMessageBox::information(this, tr("Error!"), tr("The value you entered is not an hexadecimal number!"));
             break;
         }       
-        if(c >= 2) {
-            sum = sum + (hexStringNum[i]*powers2(c, 16));
+        if(count >= 2) {
+            decimal += (hexStringNum[i]*powers2(count, 16));
         }
-        else if (c == 1) {
-            sum = sum + (hexStringNum[i] * 16);
+        else if (count == 1) {
+            decimal += (hexStringNum[i] * 16);
         }
-        else if (c == 0) {
-            sum = sum + (hexStringNum[i] * 1);
+        else if (count == 0) {
+            decimal += (hexStringNum[i] * 1);
         }
-        c++;
+        count += 1;
     }
     if (!invalid) {
         ui->txtDec->clear();
-        ui->txtDec->setText(QString::number(sum));
-        decBin(sum);
-        decOct(sum);
-        decHex(sum);
+        ui->txtDec->setText(QString::number(decimal));
+        decBin(decimal);
+        decOct(decimal);
+        decHex(decimal);
     }
 }
 

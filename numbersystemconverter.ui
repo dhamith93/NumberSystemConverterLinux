@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>971</width>
-    <height>389</height>
+    <width>810</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="palette">
@@ -81,7 +81,7 @@
    <widget class="QPushButton" name="clearAll">
     <property name="geometry">
      <rect>
-      <x>850</x>
+      <x>680</x>
       <y>310</y>
       <width>91</width>
       <height>31</height>
@@ -107,7 +107,7 @@
      <rect>
       <x>30</x>
       <y>-10</y>
-      <width>911</width>
+      <width>740</width>
       <height>331</height>
      </rect>
     </property>
@@ -130,7 +130,7 @@
         <widget class="QLineEdit" name="txtDec">
          <property name="font">
           <font>
-           <family>Liberation Mono</family>
+           <family>Monospace</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -171,7 +171,7 @@
         <widget class="QLineEdit" name="txtBin">
          <property name="font">
           <font>
-           <family>Liberation Mono</family>
+           <family>Monospace</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -212,7 +212,7 @@
         <widget class="QLineEdit" name="txtOct">
          <property name="font">
           <font>
-           <family>Liberation Mono</family>
+           <family>Monospace</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -253,7 +253,7 @@
         <widget class="QLineEdit" name="txtHex">
          <property name="font">
           <font>
-           <family>Liberation Mono</family>
+           <family>Monospace</family>
            <pointsize>12</pointsize>
           </font>
          </property>
@@ -284,7 +284,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>971</width>
+     <width>810</width>
      <height>24</height>
     </rect>
    </property>
@@ -750,7 +750,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Version 1.1 Linux</string>
+    <string>Version 1.2 Linux</string>
    </property>
    <property name="font">
     <font>
